@@ -4,6 +4,14 @@ import 'package:meals_app/widgets/main_drawer.dart';
 class FiltersScreen extends StatefulWidget {
   static const routeName = "/filters";
 
+  final Function saveFilters;
+  final Map<String, bool> currentFilters;
+
+  FiltersScreen(
+    this.currentFilters,
+    this.saveFilters,
+  );
+
   @override
   _FiltersScreenState createState() => _FiltersScreenState();
 }
@@ -13,6 +21,16 @@ class _FiltersScreenState extends State<FiltersScreen> {
   bool _vegetarian = false;
   bool _vegan = false;
   bool _lactoseFree = false;
+
+  @override
+  initState() {
+    _glutenFree = widget.currentFilters["gluten"];
+    _vegetarian = widget.currentFilters["vegetarian"];
+    _vegan = widget.currentFilters["vegan"];
+    _lactoseFree = widget.currentFilters["lactose"];
+
+    super.initState();
+  }
 
   Widget _buildSwitchListTile(
     String title,
@@ -28,12 +46,28 @@ class _FiltersScreenState extends State<FiltersScreen> {
     );
   }
 
+  void _saveAction() {
+    final selectedFilters = {
+      "gluten": _glutenFree,
+      "lactose": _lactoseFree,
+      "vegan": _vegan,
+      "vegetarian": _vegetarian,
+    };
+    widget.saveFilters(selectedFilters);
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           title: Text("My Filters"),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.save),
+              onPressed: _saveAction,
+            ),
+          ],
         ),
         drawer: MainDrawer(),
         body: Column(
@@ -87,6 +121,38 @@ class _FiltersScreenState extends State<FiltersScreen> {
                         _vegan = newValue;
                       });
                     },
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      vertical: 0,
+                      horizontal: 30,
+                    ),
+                    child: FlatButton(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 20,
+                        horizontal: 0,
+                      ),
+                      color: Theme.of(context).accentColor,
+                      onPressed: _saveAction,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.save,
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Text(
+                            "Save Filters",
+                            style: Theme.of(context).textTheme.headline6,
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ],
               ),

@@ -58,7 +58,7 @@ class MainDrawer extends StatelessWidget {
             ),
             buildListTile(
               "Filters",
-              Icons.settings,
+              Icons.filter_list,
               () {
                 Navigator.of(context)
                     .pushReplacementNamed(FiltersScreen.routeName);
