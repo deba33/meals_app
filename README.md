@@ -1,6 +1,6 @@
 # expense_planner
 
-A Flutter project to track expenses.
+A Flutter project.
 
 ## Getting Started
 
