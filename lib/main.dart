@@ -5,7 +5,6 @@ import './models/meals.dart';
 import './screens/filters_screen.dart';
 import './screens/tab_screen.dart';
 import './screens/category_meals_screen.dart';
-// import './screens/categories_screen.dart';
 import './screens/meal_detail_screen.dart';
 
 void main() => runApp(MyApp());
@@ -73,8 +72,8 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'DeliMeals',
       theme: ThemeData(
-        primarySwatch: Colors.pink,
-        accentColor: Colors.amber,
+        primarySwatch: Colors.blueGrey,
+        accentColor: Colors.lightGreenAccent,
         canvasColor: Color.fromRGBO(255, 254, 229, 1),
         fontFamily: "Raleway",
         textTheme: ThemeData.light().textTheme.copyWith(
